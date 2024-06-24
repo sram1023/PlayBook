@@ -32,12 +32,16 @@ jobs:
           # sudo apt-get update
           # sudo apt-get install -y google-chrome-stable=114.0.5735.90-1
           # google-chrome --version
-          
-          sudo apt-get update
-          sudo apt-get install -y wget apt-transport-https software-properties-common
+
           wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.90-1_amd64.deb
           sudo dpkg -i google-chrome-stable_114.0.5735.90-1_amd64.deb || sudo apt-get install -f -y
           google-chrome --version
+
+          # sudo apt-get update
+          # sudo apt-get install -y wget apt-transport-https software-properties-common
+          # wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.90-1_amd64.deb
+          # sudo dpkg -i google-chrome-stable_114.0.5735.90-1_amd64.deb || sudo apt-get install -f -y
+          # google-chrome --version
 
     - name: Install ChromeDriver
       run: |
