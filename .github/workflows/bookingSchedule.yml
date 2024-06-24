@@ -20,38 +20,31 @@ jobs:
       
     - name: Install Chrome
       run: |
-          # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          # sudo apt-get update
-          # sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
-          # google-chrome --version
+          sudo apt-get install xvfb
 
-          # sudo apt-get update
-          # sudo apt-get install -y wget apt-transport-https software-properties-common
-          # wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          # sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-          # sudo apt-get update
-          # sudo apt-get install -y google-chrome-stable=114.0.5735.90-1
-          # google-chrome --version
+          sudo apt-get install unzip
 
-          wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.90-1_amd64.deb
-          sudo dpkg -i google-chrome-stable_114.0.5735.90-1_amd64.deb || sudo apt-get install -f -y
-          google-chrome --version
+          CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
 
-    - name: Install ChromeDriver
-      run: |
-          # CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          # wget https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
-          # sudo apt-get install -y unzip
-          # unzip chromedriver_linux64.zip
-          # sudo mv chromedriver /usr/local/bin/
-          # chromedriver --version
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+          sudo apt-get update 
+          sudo apt install google-chrome-stable
 
-          CHROME_DRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_114.0.5735")
-          wget "https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip"
-          sudo apt-get install -y unzip
+          wget -N http://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
-          chromedriver --version
+          chmod +x chromedriver
+          sudo mv -f chromedriver /usr/local/bin/
+
+    # - name: Install ChromeDriver
+    #   run: |
+        
+    #       CHROME_DRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_114.0.5735")
+    #       wget "https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip"
+    #       sudo apt-get install -y unzip
+    #       unzip chromedriver_linux64.zip
+    #       sudo mv chromedriver /usr/local/bin/
+    #       chromedriver --version
 
     - name: Install dependencies
       run: |
