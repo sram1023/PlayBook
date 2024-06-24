@@ -9,6 +9,5 @@ pyparsing==2.4.7
 pytest==6.1.1
 selenium==3.141.0
 toml==0.10.1
-urllib3==1.25.11
 pandas
 openpyxl
