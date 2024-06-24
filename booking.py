@@ -105,9 +105,9 @@ if __name__ == "__main__":
         options.add_argument("--headless")
         options.add_argument("--window-size=1920,1080")
         options.add_argument("--disable-dev-shm-usage")
-        driver = webdriver.Chrome(service=Service('/usr/local/bin/chromedriver'), options=options)
-        driver.get(
-            'https://bookings.mytimeleisure.co.uk/connectleisure/mrmlogin.aspx')
+        service = Service('/usr/local/bin/chromedriver')
+        driver = webdriver.Chrome(service=service, options=options)
+        driver.get('https://bookings.mytimeleisure.co.uk/connectleisure/mrmlogin.aspx')
     # else:
     #     driver = webdriver.Chrome()
 
