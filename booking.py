@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.chrome.options import Options
 import time
 
 
@@ -96,18 +97,19 @@ def main():
 
 
 if __name__ == "__main__":
-    browser = "localChrome"
-    if browser == "remoteChrome":
+    # browser = "localChrome"
+    # if browser == "remoteChrome":
         options = Options()
         options.add_argument("--no-sandbox")
         options.add_argument("--headless")
         options.add_argument("--window-size=1920,1080")
         options.add_argument("--disable-dev-shm-usage")
-        driver = webdriver.Chrome(options)
-    else:
-        driver = webdriver.Chrome()
-    driver.get(
-        'https://bookings.mytimeleisure.co.uk/connectleisure/mrmlogin.aspx')
-    driver.maximize_window()
-    print('Browser launch')
-    main()
+        driver = webdriver.Chrome(service=Service('/usr/local/bin/chromedriver'), options=options)
+        driver.get(
+            'https://bookings.mytimeleisure.co.uk/connectleisure/mrmlogin.aspx')
+    # else:
+    #     driver = webdriver.Chrome()
+
+    # driver.maximize_window()
+        print('Browser launch')
+        main()
