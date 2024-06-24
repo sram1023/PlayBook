@@ -61,7 +61,7 @@ jobs:
     - name: Run Python script
       shell: /usr/bin/bash -e {0}
       env:
-         pythonLocation: /opt/hostedtoolcache/Python/3.12.4/x64
+        pythonLocation: /opt/hostedtoolcache/Python/3.12.4/x64
         LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.4/x64/lib
         DISPLAY: ':99' # Set display environment variable for headless mode
       run: |
