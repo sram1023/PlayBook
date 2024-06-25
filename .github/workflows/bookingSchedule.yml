@@ -48,9 +48,18 @@ jobs:
           # sudo mv chromedriver /usr/local/bin/
           # chromedriver --version
 
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -n 1)
-          CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
-          wget https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
+          # Fetch the major version of Chrome installed
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+')
+          
+          # Get the latest ChromeDriver version for the Chrome major version
+          CHROMEDRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+          
+          # Fall back to the latest ChromeDriver version if specific version not found
+          if [ -z "$CHROMEDRIVER_VERSION" ]; then
+            CHROMEDRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+          fi
+          
+          wget "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
           sudo apt-get install -y unzip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
