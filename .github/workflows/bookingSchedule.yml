@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: '3.12.4' # Specify the Python version
-      before script: 
+      before_script: 
        - apt-get update -qq -y
        - >
           apt-get install -y wget unzip fonts-liberation libasound2 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0
